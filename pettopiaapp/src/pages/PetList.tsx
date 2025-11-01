@@ -1,28 +1,14 @@
-import React, { useState } from 'react';
-import { Page, Box, Text, Icon, Sheet, Button } from 'zmp-ui';
+import React from 'react';
+import { Page, Box, Text, Icon, Button } from 'zmp-ui';
 import { useNavigate } from 'react-router-dom';
 import { mockPets, Pet } from '@/data/mockPets';
 import petIconHover from '../img/icon/pawprint-gray.png';
 
 function PetListPage() {
   const navigate = useNavigate();
-  const [selectedPet, setSelectedPet] = useState<Pet | null>(null);
-  const [showPetDetail, setShowPetDetail] = useState(false);
 
   const handlePetClick = (pet: Pet) => {
-    setSelectedPet(pet);
-    setShowPetDetail(true);
-  };
-
-  const handleEditPet = (pet: Pet) => {
-    // Navigate to edit page (to be implemented)
-    console.log('Edit pet:', pet.id);
-  };
-
-  const handleDeletePet = (pet: Pet) => {
-    // Handle delete (to be implemented)
-    console.log('Delete pet:', pet.id);
-    setShowPetDetail(false);
+    navigate(`/pets/${pet.id}`);
   };
 
   const calculateAge = (dateOfBirth: string): string => {
@@ -175,141 +161,6 @@ function PetListPage() {
           </Box>
         </Box>
       </Box>
-
-      {/* Pet Detail Sheet */}
-      {selectedPet && (
-        <Sheet
-          visible={showPetDetail}
-          onClose={() => setShowPetDetail(false)}
-          title={`Thông tin ${selectedPet.name}`}
-          height="80%"
-        >
-          <Box className="px-4 py-6 space-y-6">
-            {/* Pet Avatar */}
-            <Box className="flex justify-center">
-              <img
-                src={selectedPet.avatar_url}
-                alt={selectedPet.name}
-                className="w-32 h-32 rounded-full object-cover border-4 border-teal-100"
-              />
-            </Box>
-
-            {/* Basic Info */}
-            <Box>
-              <Text.Title size="small" className="text-gray-900 mb-4 text-center">
-                {selectedPet.name}
-              </Text.Title>
-              
-              <Box className="space-y-3">
-                <Box className="flex items-center gap-3">
-                  <Box className="w-10 h-10 rounded-full bg-teal-50 flex items-center justify-center">
-                    <Text className="text-xl">
-                      {selectedPet.species === 'Dog' ? '🐶' : selectedPet.species === 'Cat' ? '🐱' : '🐾'}
-                    </Text>
-                  </Box>
-                  <Box className="flex-1">
-                    <Text size="xSmall" className="text-gray-500">Loài</Text>
-                    <Text size="small" className="text-gray-900 font-medium">{selectedPet.species}</Text>
-                  </Box>
-                </Box>
-
-                <Box className="flex items-center gap-3">
-                  <Box className="w-10 h-10 rounded-full bg-teal-50 flex items-center justify-center">
-                    <Icon icon="zi-heart-solid" className="text-teal-600" />
-                  </Box>
-                  <Box className="flex-1">
-                    <Text size="xSmall" className="text-gray-500">Giống</Text>
-                    <Text size="small" className="text-gray-900 font-medium">{selectedPet.breed}</Text>
-                  </Box>
-                </Box>
-
-                <Box className="flex items-center gap-3">
-                  <Box className="w-10 h-10 rounded-full bg-teal-50 flex items-center justify-center">
-                    <Icon icon="zi-user" className="text-teal-600" />
-                  </Box>
-                  <Box className="flex-1">
-                    <Text size="xSmall" className="text-gray-500">Giới tính</Text>
-                    <Text size="small" className="text-gray-900 font-medium">
-                      {selectedPet.gender === 'Male' ? 'Đực' : 'Cái'}
-                    </Text>
-                  </Box>
-                </Box>
-
-                <Box className="flex items-center gap-3">
-                  <Box className="w-10 h-10 rounded-full bg-teal-50 flex items-center justify-center">
-                    <Text className="text-xl">🎨</Text>
-                  </Box>
-                  <Box className="flex-1">
-                    <Text size="xSmall" className="text-gray-500">Màu lông</Text>
-                    <Text size="small" className="text-gray-900 font-medium">{selectedPet.color}</Text>
-                  </Box>
-                </Box>
-
-                <Box className="flex items-center gap-3">
-                  <Box className="w-10 h-10 rounded-full bg-teal-50 flex items-center justify-center">
-                    <Text className="text-xl">⚖️</Text>
-                  </Box>
-                  <Box className="flex-1">
-                    <Text size="xSmall" className="text-gray-500">Cân nặng</Text>
-                    <Text size="small" className="text-gray-900 font-medium">{selectedPet.weight} kg</Text>
-                  </Box>
-                </Box>
-
-                <Box className="flex items-center gap-3">
-                  <Box className="w-10 h-10 rounded-full bg-teal-50 flex items-center justify-center">
-                    <Text className="text-xl">🎂</Text>
-                  </Box>
-                  <Box className="flex-1">
-                    <Text size="xSmall" className="text-gray-500">Ngày sinh</Text>
-                    <Text size="small" className="text-gray-900 font-medium">
-                      {new Date(selectedPet.dateOfBirth).toLocaleDateString('vi-VN')} ({calculateAge(selectedPet.dateOfBirth)})
-                    </Text>
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-
-            {/* Owner Info */}
-            <Box className="border-t border-gray-200 pt-4">
-              <Text.Title size="small" className="text-gray-900 mb-3">
-                Chủ sở hữu
-              </Text.Title>
-              <Box className="space-y-2">
-                <Text size="small" className="text-gray-900">
-                  <strong>Tên:</strong> {selectedPet.owner.fullname}
-                </Text>
-                <Text size="small" className="text-gray-900">
-                  <strong>Điện thoại:</strong> {selectedPet.owner.phone}
-                </Text>
-                <Text size="small" className="text-gray-900">
-                  <strong>Email:</strong> {selectedPet.owner.email}
-                </Text>
-                <Text size="small" className="text-gray-900">
-                  <strong>Địa chỉ:</strong> {selectedPet.owner.address.ward}, {selectedPet.owner.address.district}, {selectedPet.owner.address.city}
-                </Text>
-              </Box>
-            </Box>
-
-            {/* Action Buttons */}
-            <Box className="flex gap-3 pt-4 border-t border-gray-200">
-              <Button
-                type="highlight"
-                fullWidth
-                onClick={() => handleEditPet(selectedPet)}
-              >
-                Chỉnh sửa
-              </Button>
-              <Button
-                type="danger"
-                fullWidth
-                onClick={() => handleDeletePet(selectedPet)}
-              >
-                Xóa
-              </Button>
-            </Box>
-          </Box>
-        </Sheet>
-      )}
     </Page>
   );
 }
