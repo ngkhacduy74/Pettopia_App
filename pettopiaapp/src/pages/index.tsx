@@ -67,7 +67,11 @@ function HomePage() {
           <Box className="bg-white rounded-2xl shadow-md border border-gray-100 p-4">
             <Box className="grid grid-cols-4 gap-3">
               {quickActions.map((item, i) => (
-                <Box key={i} className="flex flex-col items-center">
+                <Box 
+                  key={i} 
+                  className="flex flex-col items-center cursor-pointer"
+                  onClick={() => item.label === 'Thú cưng' && navigate('/pets')}
+                >
                   <Box className="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center mb-2">
                     {item.img ? (
                       <img src={item.img} alt={item.label} className="w-5 h-5" />
@@ -123,7 +127,7 @@ function HomePage() {
             <Icon icon="zi-search" />
             <Text size="xxSmall">Tìm kiếm</Text>
           </Box>
-          <Box className="flex flex-col items-center text-gray-500" onClick={() => navigate('/cart')}>
+          <Box className="flex flex-col items-center text-gray-500" onClick={() => navigate('/pets')}>
             <img src={petIconHover} alt="Thú cưng" className="w-5 h-5" />
             <Text size="xxSmall">Thú cưng</Text>
           </Box>

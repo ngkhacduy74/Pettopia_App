@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import { AppProps } from "zmp-ui/app";
 
 import HomePage from "@/pages/index";
+import PetListPage from "@/pages/PetList";
 import logo from "../img/logo.png";
 
 const Layout = () => {
@@ -50,6 +51,7 @@ const Layout = () => {
         <ZMPRouter>
           <AnimationRoutes>
             <Route path="/" element={<HomePage />}></Route>
+            <Route path="/pets" element={<PetListPage />}></Route>
           </AnimationRoutes>
         </ZMPRouter>
       </Box>
