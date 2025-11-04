@@ -13,6 +13,10 @@ import { AppProps } from "zmp-ui/app";
 import HomePage from "@/pages/index";
 import PetListPage from "@/pages/PetList";
 import PetDetailPage from "@/pages/PetDetail";
+import CommunityPage from "@/pages/Community";
+import CommunityCreatePage from "@/pages/CommunityCreate";
+import CommunityDetailPage from "@/pages/CommunityDetail";
+import CommunityHistoryPage from "@/pages/CommunityHistory";
 import logo from "../img/logo.png";
 
 const Layout = () => {
@@ -54,6 +58,10 @@ const Layout = () => {
             <Route path="/" element={<HomePage />}></Route>
             <Route path="/pets" element={<PetListPage />}></Route>
             <Route path="/pets/:id" element={<PetDetailPage />}></Route>
+            <Route path="/community" element={<CommunityPage />}></Route>
+            <Route path="/community/create" element={<CommunityCreatePage />}></Route>
+            <Route path="/community/detail/:id" element={<CommunityDetailPage />}></Route>
+            <Route path="/community/history" element={<CommunityHistoryPage />}></Route>
           </AnimationRoutes>
         </ZMPRouter>
       </Box>

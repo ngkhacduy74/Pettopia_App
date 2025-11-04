@@ -70,7 +70,12 @@ function HomePage() {
                 <Box 
                   key={i} 
                   className="flex flex-col items-center cursor-pointer"
-                  onClick={() => item.label === 'Thú cưng' && navigate('/pets')}
+                  onClick={() => {
+                    if (item.label === 'Giao tiếp') navigate('/community');
+                    else if (item.label === 'Thú cưng') navigate('/pets');
+                    else if (item.label === 'Lịch khám') navigate('/booking');
+                    else if (item.label === 'Lịch sử') navigate('/community/history');
+                  }}
                 >
                   <Box className="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center mb-2">
                     {item.img ? (
